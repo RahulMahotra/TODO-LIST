@@ -9,6 +9,15 @@ const tasks = {
 
 btn.addEventListener('click', addList);
 
+// input.addEventListener('keypress', function(e){
+//     console.log("wdjsnahc", e);
+//     if(e.key == "Enter"){
+//         e.preventDefault();
+//         console.log(e);
+//         btn.click();
+//     }
+// })
+
 function addList(e){
     const notCompleted = document.querySelector('.to-do');
     const progress = document.querySelector('.in-progress');
@@ -54,7 +63,7 @@ function addList(e){
             const li_id = getId(parent, tasks["todo"]);
 
             tasks["inProgress"].push(li_id[1]);
-            tasks["todo"] = tasks["todo"].splice(li_id[0],li_id[0]);
+            tasks["todo"].splice(li_id[0],li_id[0]);
         }
 
         if(gp.classList.contains('in-progress')){
@@ -65,7 +74,7 @@ function addList(e){
             const li_id = getId(parent, tasks["inProgress"]);
 
             tasks["finish"].push(li_id[1]);
-            tasks["inProgress"] = tasks["inProgress"].splice(li_id[0],li_id[0]);
+            tasks["inProgress"].splice(li_id[0],li_id[0]);
         }
     })
 
@@ -82,7 +91,7 @@ function addList(e){
             const li_id = getId(parent, tasks["inProgress"]);
 
             tasks["todo"].push(li_id[1]);
-            tasks["inProgress"] = tasks["inProgress"].splice(li_id[0],li_id[0]);
+            tasks["inProgress"].splice(li_id[0],li_id[0]);
         }
 
         if(gp.classList.contains('done')){
@@ -92,7 +101,7 @@ function addList(e){
             const li_id = getId(parent, tasks["finish"]);
 
             tasks["inProgress"].push(li_id[1]);
-            tasks["finish"] = tasks["finish"].splice(li_id[0],li_id[0]);
+            tasks["finish"].splice(li_id[0],li_id[0]);
         }
 
     })
@@ -107,17 +116,17 @@ function addList(e){
 
         if(gp.classList.contains('to-do')){
             li_id = getId(parent, tasks["todo"]);
-            tasks["todo"] = tasks["todo"].splice(li_id[0],li_id[0]);
+            tasks["todo"].splice(li_id[0],li_id[0]);
         }
         else if(gp.classList.contains('in-progress')){
             li_id = getId(parent, tasks["inProgress"]);
-            tasks["inProgress"] = tasks["inProgress"].splice(li_id[0],li_id[0]);
+            tasks["inProgress"].splice(li_id[0],li_id[0]);
         }
         else{
             console.log("before del", tasks);
             li_id = getId(parent, tasks["finish"]);
             console.log(li_id);
-            tasks["finish"] = tasks["finsih"].splice(li_id[0],li_id[0]);
+            tasks["finsih"].splice(li_id[0],li_id[0]);
             console.log("after del", tasks);
         }
     })
