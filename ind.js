@@ -23,26 +23,29 @@ function addList(e){
     const progress = document.querySelector('.in-progress');
     const completed = document.querySelector('.done');
 
-    const newLi = document.createElement('li');
+    // const taskDiv = document.createElement('li');
     const checkBtn = document.createElement('button');
     const delBtn = document.createElement('button');
     const prevBtn = document.createElement('button');
+
+    const taskDiv = document.createElement('div');
+    taskDiv.setAttribute("class", "taskCard");
 
     checkBtn.innerHTML = '<i class="fa-solid fa-caret-right"></i>';
     delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
     prevBtn.innerHTML = '<i class="fa-solid fa-caret-left"></i>';
 
     let id = new Date().valueOf();
-    newLi.setAttribute("class", `${id}`);
+    taskDiv.setAttribute("class", `${id}`);
 
     if(input.value !== ''){
-        newLi.textContent = input.value;
+        taskDiv.textContent = input.value;
         input.value = '';
-        newLi.appendChild(checkBtn);
-        newLi.appendChild(delBtn);
+        taskDiv.appendChild(checkBtn);
+        taskDiv.appendChild(delBtn);
 
         tasks.todo.push(id);
-        notCompleted.appendChild(newLi);
+        notCompleted.appendChild(taskDiv);
     }
 
     // console.log(tasks["todo"][tasks["todo"].length-1]);
@@ -56,7 +59,7 @@ function addList(e){
         parent.remove();
 
         if(gp.classList.contains('to-do')){
-            newLi.appendChild(prevBtn);
+            taskDiv.appendChild(prevBtn);
             progress.appendChild(parent);
             
             // console.log(tasks["todo"]);
@@ -67,8 +70,8 @@ function addList(e){
         }
 
         if(gp.classList.contains('in-progress')){
-            newLi.removeChild(checkBtn);
-            // newLi.removeChild(prevBtn);
+            taskDiv.removeChild(checkBtn);
+            // taskDiv.removeChild(prevBtn);
             completed.appendChild(parent);
             
             const li_id = getId(parent, tasks["inProgress"]);
@@ -84,7 +87,7 @@ function addList(e){
         parent.remove();
 
         if(gp.classList.contains('in-progress')){
-            newLi.removeChild(prevBtn);
+            taskDiv.removeChild(prevBtn);
             notCompleted.appendChild(parent);
             
             // console.log(tasks["todo"]);
@@ -95,7 +98,7 @@ function addList(e){
         }
 
         if(gp.classList.contains('done')){
-            newLi.appendChild(checkBtn);
+            taskDiv.appendChild(checkBtn);
             progress.appendChild(parent);
             
             const li_id = getId(parent, tasks["finish"]);
@@ -126,7 +129,7 @@ function addList(e){
             console.log("before del", tasks);
             li_id = getId(parent, tasks["finish"]);
             console.log(li_id);
-            tasks["finsih"].splice(li_id[0],li_id[0]);
+            tasks["finish"].splice(li_id[0],li_id[0]);
             console.log("after del", tasks);
         }
     })
