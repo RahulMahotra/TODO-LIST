@@ -45,8 +45,14 @@ const handleDeleteTask = (index, category) => {
     location.reload();
 }
 
-const handleChaneCardStage = ({id,}) =>{
-    //
+const handleChaneCardStage = (index, category1, category2) =>{
+    const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODOS));
+    
+    tasks[category2].push(tasks[category1][index]);
+    tasks[category1].splice(index, 1);
+    
+    saveTodos();
+    location.reload();
 }
 
 function displayItems(){
@@ -73,6 +79,9 @@ function displayItems(){
         })
         
         checkBtn.addEventListener('click', () => {
+            let category1 = "todo";
+            let category2 = "inProgress";
+            handleChaneCardStage(i, category1, category2);
         })
 
         const taskDiv = document.createElement('div');
@@ -90,30 +99,78 @@ function displayItems(){
     //2
     for(let i=0; i<arr2.length; i++){
         
+        console.log("here13feqv");
+
+        const checkBtn = document.createElement('button');
+        const delBtn = document.createElement('button');
+        const prevBtn = document.createElement('button');
+        
+        checkBtn.innerHTML = '<i class="fa-solid fa-caret-right"></i>';
+        delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        prevBtn.innerHTML = '<i class="fa-solid fa-caret-left"></i>';
+
         const taskDiv = document.createElement('div');
         taskDiv.setAttribute("class", `${arr2[i].id}`);
         taskDiv.classList.add('taskCard');
 
         taskDiv.textContent = `${arr2[i].divData}`;
     
-        taskDiv.appendChild(prevBtn);
-        taskDiv.appendChild(delBtn);
         taskDiv.appendChild(checkBtn);
+        taskDiv.appendChild(delBtn);
+        taskDiv.appendChild(prevBtn);
     
         progress.appendChild(taskDiv);
+
+        delBtn.addEventListener('click', () => {
+            console.log(i);
+            let category = "inProgress";
+            handleDeleteTask(i, category);
+        })
+
+        checkBtn.addEventListener('click', () => {
+            let category1 = "inProgress";
+            let category2 = "finish";
+            handleChaneCardStage(i, category1, category2);
+        })
+
+        prevBtn.addEventListener('click', () => {
+            let category1 = "inProgress";
+            let category2 = "todo";
+            handleChaneCardStage(i, category1, category2);
+        })
     }
     
     //3
     for(let i=0; i<arr3.length; i++){
         
+        const checkBtn = document.createElement('button');
+        const delBtn = document.createElement('button');
+        const prevBtn = document.createElement('button');
+        
+        checkBtn.innerHTML = '<i class="fa-solid fa-caret-right"></i>';
+        delBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        prevBtn.innerHTML = '<i class="fa-solid fa-caret-left"></i>';
+
         const taskDiv = document.createElement('div');
         taskDiv.setAttribute("class", `${arr3[i].id}`);
         taskDiv.textContent = `${arr3[i].divData}`;
-    
-        taskDiv.appendChild(prevBtn);
+        
         taskDiv.appendChild(delBtn);
-
+        taskDiv.appendChild(prevBtn);
+    
         completed.appendChild(taskDiv);
+
+        delBtn.addEventListener('click', () => {
+            console.log(i);
+            let category = "finish";
+            handleDeleteTask(i, category);
+        })
+
+        prevBtn.addEventListener('click', () => {
+            let category1 = "finish";
+            let category2 = "inProgress";
+            handleChaneCardStage(i, category1, category2);
+        })
     }
 }
 
