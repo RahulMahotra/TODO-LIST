@@ -317,6 +317,6 @@ function getId(e, arr){
 }
  */
 window.onload = function(){
-    
+  
     displayItems();
 }
