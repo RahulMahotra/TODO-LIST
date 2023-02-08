@@ -153,6 +153,7 @@ function displayItems(){
 
         const taskDiv = document.createElement('div');
         taskDiv.setAttribute("class", `${arr3[i].id}`);
+        taskDiv.classList.add('taskCard');
         taskDiv.textContent = `${arr3[i].divData}`;
         
         taskDiv.appendChild(delBtn);
